@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-z==4a5r)ah7%^^23hrdj_af5j@$#!69w_id#8ou(3ig%m6@svq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['smartlibrary.pythonanywhere.com',]
 
 
 # Application definition
@@ -95,7 +95,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'smartlibrary$database',
+            'NAME': 'smartlibrary$default',
             'USER': 'smartlibrary',
             'PASSWORD': 'notCommonPassword123$',
             'HOST': 'smartlibrary.mysql.pythonanywhere-services.com',
