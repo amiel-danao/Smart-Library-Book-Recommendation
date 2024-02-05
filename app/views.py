@@ -7,6 +7,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Book
 from .serializers import BookSerializer
+from django.db.models import Q
 
 class BookViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Book.objects.all()
@@ -14,9 +15,8 @@ class BookViewSet(viewsets.ReadOnlyModelViewSet):
 
     @action(detail=False, methods=['get'])
     def search(self, request):
-        title = request.query_params.get('title', '')
-        author = request.query_params.get('author', '')
+        search_term = request.query_params.get('search', '')
 
-        queryset = Book.objects.filter(title__icontains=title, author__icontains=author)
+        queryset = Book.objects.filter(Q(title__icontains=search_term) | Q(author__icontains=search_term))
         serializer = BookSerializer(queryset, many=True)
         return Response(serializer.data)
