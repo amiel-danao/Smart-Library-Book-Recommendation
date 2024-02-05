@@ -1,0 +1,10 @@
+Smart Library Book Recommendation System (using Collaborative Filtering)
+
+app
+
+maximum of 800 books
+16 course divide 800
+
+admin will manage the ratings of books
+
+registration with username
