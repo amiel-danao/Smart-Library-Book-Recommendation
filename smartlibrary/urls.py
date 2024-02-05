@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 from app.admin import admin_site
 from rest_framework.routers import DefaultRouter
+from django.conf.urls.static import static
+from django.conf import settings
 
 from app.views import BookViewSet
 
@@ -29,4 +31,4 @@ urlpatterns = [
     path('', RedirectView.as_view(url='/admin/')),
     path('admin/', admin_site.urls),  # Use the custom admin site URLs
     path('api/', include(router.urls)),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
