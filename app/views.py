@@ -16,7 +16,14 @@ class BookViewSet(viewsets.ReadOnlyModelViewSet):
     @action(detail=False, methods=['get'])
     def search(self, request):
         search_term = request.query_params.get('search', '')
+        sort_by = request.query_params.get('sort', '')
 
         queryset = Book.objects.filter(Q(title__icontains=search_term) | Q(author__icontains=search_term))
+
+        if sort_by == 'popularity':
+            queryset = queryset.order_by('-popularity')
+        elif sort_by == 'rating':
+            queryset = queryset.order_by('-rating')
+
         serializer = BookSerializer(queryset, many=True)
         return Response(serializer.data)
