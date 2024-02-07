@@ -10,6 +10,7 @@ class Book(models.Model):
     course = models.CharField(max_length=100)
     total_rating = models.FloatField(default=0)  # New field for total rating
     rating_count = models.PositiveIntegerField(default=0)  # New field for rating count
+    image = models.ImageField(upload_to='book_images/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} by {self.author}"
