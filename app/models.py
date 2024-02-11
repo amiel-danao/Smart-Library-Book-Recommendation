@@ -2,14 +2,14 @@
 from django.db import models
 
 class Book(models.Model):
-    author = models.CharField(max_length=255)
-    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=255, null=True)
+    title = models.CharField(max_length=255, null=True)
     year = models.PositiveIntegerField(default=0, null=True)
-    popularity = models.PositiveIntegerField()
-    rating = models.FloatField(default=0)  # Add default value for rating
-    course = models.CharField(max_length=100)
-    total_rating = models.FloatField(default=0)  # New field for total rating
-    rating_count = models.PositiveIntegerField(default=0)  # New field for rating count
+    popularity = models.PositiveIntegerField(default=0, null=True)
+    rating = models.FloatField(default=0, null=True)  # Add default value for rating
+    course = models.CharField(max_length=100, null=True)
+    total_rating = models.FloatField(default=0, null=True)  # New field for total rating
+    rating_count = models.PositiveIntegerField(default=0, null=True)  # New field for rating count
     # image = models.ImageField(upload_to='book_images/', null=True, blank=True)
 
     def __str__(self):
