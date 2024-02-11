@@ -4,7 +4,7 @@ from django.db import models
 class Book(models.Model):
     author = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
-    year = models.PositiveIntegerField()
+    year = models.PositiveIntegerField(default=0, null=True)
     popularity = models.PositiveIntegerField()
     rating = models.FloatField(default=0)  # Add default value for rating
     course = models.CharField(max_length=100)

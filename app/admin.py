@@ -21,6 +21,7 @@ admin_site = SmartLibraryAdminSite(name='smart_library_admin')
 class BookResource(resources.ModelResource):
     class Meta:
         model = Book
+        exclude = ('total_rating', 'rating_count', 'image')
 
     # Specify the widget for the CharField (assuming course is a CharField)
     widgets = {
