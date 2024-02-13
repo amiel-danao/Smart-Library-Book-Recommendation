@@ -36,4 +36,12 @@ class BookAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('author', 'title', 'year', 'popularity', 'rating', 'course')
     readonly_fields = ('rating', )
 
+    def has_import_permission(self, request):
+        # Override this method to control whether import button should be visible
+        return request.META.get('HTTP_HOST') == '127.0.0.1:8000'
+
+    def has_export_permission(self, request):
+        # Override this method to control whether export button should be visible
+        return request.META.get('HTTP_HOST') == '127.0.0.1:8000'
+
 admin_site.register(Book, BookAdmin)
