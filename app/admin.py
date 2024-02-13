@@ -34,5 +34,6 @@ class BookResource(resources.ModelResource):
 class BookAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = BookResource
     list_display = ('author', 'title', 'year', 'popularity', 'rating', 'course')
+    readonly_fields = ('rating', )
 
 admin_site.register(Book, BookAdmin)

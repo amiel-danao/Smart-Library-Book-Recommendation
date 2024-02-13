@@ -9,6 +9,8 @@ from .models import Book
 from .serializers import BookSerializer
 from django.db.models import Q
 
+from django.db.models import Q
+
 class BookViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -18,12 +20,19 @@ class BookViewSet(viewsets.ReadOnlyModelViewSet):
         search_term = request.query_params.get('search', '')
         sort_by = request.query_params.get('sort', '')
 
-        queryset = Book.objects.filter(Q(title__icontains=search_term) | Q(author__icontains=search_term))
+        queryset = Book.objects.filter(
+            Q(title__icontains=search_term) | Q(author__icontains=search_term)
+        )
+
 
         if sort_by == 'popularity':
             queryset = queryset.order_by('-popularity')
         elif sort_by == 'rating':
             queryset = queryset.order_by('-rating')
+        else:
+            # Default sorting if no sort parameter is provided
+            queryset = queryset.order_by('title')
 
         serializer = BookSerializer(queryset, many=True)
         return Response(serializer.data)
+
