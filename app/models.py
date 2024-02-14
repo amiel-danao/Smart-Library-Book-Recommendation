@@ -31,3 +31,13 @@ class Rating(models.Model):
 
     class Meta:
         unique_together = ('user', 'book')
+
+    def save(self, *args, **kwargs):
+        # Call the original save method
+        super().save(*args, **kwargs)
+        
+        # Update the related Book's total_rating, rating_count, and popularity
+        self.book.total_rating += self.rating
+        self.book.rating_count += 1
+        self.book.popularity = self.book.ratings.count()  # Update popularity based on the number of ratings
+        self.book.save()
