@@ -22,7 +22,7 @@ from rest_framework.routers import DefaultRouter
 from django.conf.urls.static import static
 from django.conf import settings
 
-from app.views import BookViewSet
+from app.views import BookRatingAPIView, BookViewSet, RatingCreateAPIView
 
 router = DefaultRouter()
 router.register(r'books', BookViewSet)
@@ -31,4 +31,6 @@ urlpatterns = [
     path('', RedirectView.as_view(url='/admin/')),
     path('admin/', admin_site.urls),  # Use the custom admin site URLs
     path('api/', include(router.urls)),
+    path('api/rate/', RatingCreateAPIView.as_view(), name='rate-book'),
+    path('api/book/<int:book_id>/rating/<str:user_id>/', BookRatingAPIView.as_view(), name='book-rating')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

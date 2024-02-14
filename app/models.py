@@ -22,3 +22,12 @@ class Book(models.Model):
         else:
             self.rating = 0
         super().save(*args, **kwargs)
+
+
+class Rating(models.Model):
+    user = models.CharField(default="", max_length=300, null=False)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='ratings')
+    rating = models.PositiveIntegerField(default=0, null=True)
+
+    class Meta:
+        unique_together = ('user', 'book')
